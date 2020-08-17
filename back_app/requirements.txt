@@ -7,3 +7,4 @@ flask_restplus==0.13.0
 mongoengine==0.20.0
 python-dotenv==0.14.0
 werkzeug==0.16.0
+dnspython>=1.16.0
