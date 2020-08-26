@@ -35,14 +35,16 @@ def define_connectoin(api):
 def define_source(api):
 
     parser = api.parser()
-    parser.add_argument('type', type=int, help='Type Name', location='form',
+    parser.add_argument('type', type=str, help='Source Type', location='form',
                         choices=[obj.type_name for obj in SourceTypes.objects().all()])
-    parser.add_argument('')
+    
 
     class SourceApi(Resource):
         @api.doc(parser=parser)
         def post(self):
             pass
+            
+
 
     return SourceApi
 
@@ -53,11 +55,16 @@ def define_upload(api):
     parser.add_argument('file', location='files',
                         type=FileStorage, required=True)
 
-    @api.expect(parser)
+    @api.doc(parser=parser)
     class UploadApi(Resource):
         def post(self):
-            uploaded_file = args['file']
-            # TODO WRITE FILE
+            data = x if (x := request.get_json()) is not None \
+                else parser.parse_args()
+            uploaded_file = data['file'].read()
+
+            path = "data/"
+            with open(f"{path}{data['name']}", "wb") as f:
+                f.write(uploaded_file)
             return jsonify({"result": "OK"})
 
     return UploadApi
