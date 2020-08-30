@@ -2,22 +2,22 @@ import React from 'react';
 import '../App.css';
 import logo from '../logo.svg';
 import TestContainer from './TestContainer'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+/* import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { NavigationBar } from '../components/NavigationBar';
 import { Home } from '../Home';
 import { Data } from '../Data';
-import { Transformations } from '../Transformations';
-
-
+import { Transformations } from '../Transformations'; */
+import MySideBar from './SideBar'
 
 function App() {
   return (
-    <React.Fragment>
-      <Router>
-        <NavigationBar />
-        <React.Component/>
-      </Router>
-    </React.Fragment>
+    <div className="App">
+      <body className="App-body">
+      <img src={logo} className="App-logo" alt="logo" />
+        <MySideBar className= "Nav-bar" />
+        <TestContainer />
+      </body>
+    </div>
   );
 }
 

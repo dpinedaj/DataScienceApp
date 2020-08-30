@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_restplus import Api
 from flask_mongoengine import MongoEngine
-from api.test.test_routes import test_routes
+from routes.test_routes import test_routes
+from routes.data_routes import data_routes
 from flask_cors import CORS
 
 #config = {'MONGODB_SETTINGS': {
@@ -13,7 +14,7 @@ from flask_cors import CORS
 #    'authentication_source': 'admin'}}
 
 
-##BASE DE DATOS DE ATLAS
+#BASE DE DATOS DE ATLAS
 DEFAULT_CONFIG = {
     "database": {
         "user": "admin",
@@ -37,6 +38,9 @@ api = Api(app=app)
 
 
 test = api.namespace('test', description='Test APIs')
+data = api.namespace('data', description='Data APIs')
+
 test_routes(api=test)
+data_routes(api=data)
 if __name__ == '__main__':
     app.run()
