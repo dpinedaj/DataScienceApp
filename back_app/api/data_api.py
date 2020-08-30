@@ -15,7 +15,7 @@ def define_source_type(api):
 
         @api.doc(parser=parser)
         def post(self):
-            data = x if (x := request.get_json()) is not None \
+            data = request.get_json() if  request.get_json() is not None \
                 else parser.parse_args()
 
             st = SourceTypes(**data).save()
@@ -58,7 +58,7 @@ def define_upload(api):
     @api.doc(parser=parser)
     class UploadApi(Resource):
         def post(self):
-            data = x if (x := request.get_json()) is not None \
+            data = request.get_json() if  request.get_json() is not None \
                 else parser.parse_args()
             uploaded_file = data['file'].read()
 
